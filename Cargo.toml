@@ -1,0 +1,17 @@
+[package]
+name = "kanjivg-to-png"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+anyhow = "1.0.100"
+clap = { version = "4.5.49", features = ["derive"] }
+colored = "3.0.0"
+image = "0.25.8"
+regex = "1.12.2"
+resvg = "0.45.1"
+tiny-skia = "0.11.4"
+tracing = "0.1.41"
+tracing-subscriber = "0.3.20"
+usvg = "0.45.1"
+xmltree = "0.11.0"
