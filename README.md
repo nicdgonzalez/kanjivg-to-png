@@ -113,8 +113,6 @@ Here are some tips if you want to modify how the SVGs are parsed or rendered:
 - The main entry point is [src/main.rs](./src/main.rs).
 - I recommend opening a few SVG files and getting familiar with its contents
   (it is XML-based, which is similar to HTML).
-- To create custom SVG elements, see `create_background` in
-  [src/main.rs](./src/main.rs).
 - To test your changes, run:
   ```bash
   # Set these up once, then re-use the final command.
