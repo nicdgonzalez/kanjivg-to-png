@@ -78,7 +78,7 @@ def main() -> int:
         # to 5 characters using zeros.
         #
         # For 99% of Kanji, skipping the first character works fine;
-        # I still need to figure out why some files have a 2 in front...
+        # I still need to investigate the files with a 2 in front...
         #
         # <https://kanjivg.tagaini.net/files.html>
         lambda f: f[1:].startswith(kanji),

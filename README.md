@@ -130,6 +130,26 @@ Here are some tips if you want to modify how the SVGs are parsed or rendered:
   cargo run --release -- --input "$input" --output "$output" && xdg-open "$output"
   ```
 
+## History
+
+This project was inspired by [this Reddit comment], whose PNGs I used for
+several months in my Discord bot, [NicBot]. NicBot includes a command that
+displays a randomized "Kanji of the Day":
+
+![Example of NicBot's "Kanji of the Day" embed on Discord using a stroke diagram in its response.](./docs/assets/kotd.png)
+
+In an effort to rewrite NicBot from Python to Rust, I first need to find a
+replacement for all of its dependencies. One of which, as you might have
+guessed, is related to this project and the Kanji of the Day command. It is a
+library that scrapes data from [Jisho], a popular Japanese online-dictionary.
+
+Instead of rewriting the web scraper itself in Rust, I felt it would be more
+reliable (and fun) to download the same data that Jisho uses, and build the
+embeds directly from that data.
+
+This project is the first step towards recreating NicBot's Kanji of the Day
+feature in a self-contained way.
+
 ## License
 
 This project is released under the [CC BY-SA 3.0 License], in accordance with
@@ -143,4 +163,6 @@ This project uses and modifies Kanji SVG files from [KanjiVG], which is ©
 [cc by-sa 3.0 license]: http://creativecommons.org/licenses/by-sa/3.0/
 [kanjivg]: http://kanjivg.tagaini.net
 [kanjivg/kanjivg]: https://github.com/KanjiVG/kanjivg/releases
+[nicbot]: https://github.com/nicdgonzalez/nicbot
 [releases]: https://github.com/nicdgonzalez/kanjivg-to-png/releases
+[this reddit comment]: https://www.reddit.com/r/LearnJapanese/comments/awr5vw/comment/ehriio7/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
