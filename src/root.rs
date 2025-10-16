@@ -11,7 +11,9 @@ pub type Root = Element;
 pub type NodePath = Vec<usize>;
 
 static STROKE_NUMBERS_GROUP_RE: LazyLock<Regex> =
-    LazyLock::new(|| Regex::new("^kvg:StrokeNumbers_0[a-f0-9]{4}$").unwrap());
+    LazyLock::new(|| Regex::new(r"^kvg:StrokeNumbers_\d[a-f0-9]{4}(-.*)$").unwrap());
+static STROKE_PATH_RE: LazyLock<Regex> =
+    LazyLock::new(|| Regex::new(r"^kvg:\d[a-f0-9]{4}(-.*)?-s\d+$").unwrap());
 
 /// Read an SVG from the file at `path`.
 pub fn from_file<P>(path: P) -> Result<Root, anyhow::Error>
@@ -42,19 +44,14 @@ where
 
 /// Get the path to each stroke.
 pub fn get_strokes(root: &Root) -> Vec<NodePath> {
-    fn walk(
-        nodes: &[XMLNode],
-        stroke_path_re: &Regex,
-        node_path: &mut NodePath,
-        strokes: &mut Vec<NodePath>,
-    ) {
+    fn walk(nodes: &[XMLNode], node_path: &mut NodePath, strokes: &mut Vec<NodePath>) {
         for (i, node) in nodes.iter().enumerate() {
             node_path.push(i);
 
             if let XMLNode::Element(element) = node {
                 match element.name.as_ref() {
-                    "g" => walk(&element.children, stroke_path_re, node_path, strokes),
-                    "path" if is_stroke(element, stroke_path_re) => strokes.push(node_path.clone()),
+                    "g" => walk(&element.children, node_path, strokes),
+                    "path" if is_stroke(element) => strokes.push(node_path.clone()),
                     _ => {}
                 }
             }
@@ -65,17 +62,16 @@ pub fn get_strokes(root: &Root) -> Vec<NodePath> {
 
     let mut strokes = Vec::new();
     let mut path = NodePath::new();
-    let stroke_path_re = Regex::new(r"^kvg:0[a-f0-9]{4}-s\d+$").unwrap();
-    walk(&root.children, &stroke_path_re, &mut path, &mut strokes);
+    walk(&root.children, &mut path, &mut strokes);
     strokes
 }
 
 /// Check if the element's ID matches the format for strokes.
-fn is_stroke(element: &Element, re: &Regex) -> bool {
+fn is_stroke(element: &Element) -> bool {
     element
         .attributes
         .get("id")
-        .is_some_and(|id| re.is_match(id))
+        .is_some_and(|id| STROKE_PATH_RE.is_match(id))
 }
 
 /// Remove all of the text stroke numbers.

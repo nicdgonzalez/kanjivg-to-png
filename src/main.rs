@@ -30,7 +30,7 @@ use viewbox::ViewBox;
 use xmltree::{Element, XMLNode};
 
 use crate::background::background;
-use crate::root::{NodePath, Root, delete_stroke_numbers_group, get_strokes};
+use crate::root::{Root, delete_stroke_numbers_group, get_strokes};
 use crate::stroke::{dim_stroke, hide_stroke, start_circle, unhide_stroke};
 
 #[derive(Debug, clap::Parser)]

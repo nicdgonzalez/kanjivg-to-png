@@ -99,18 +99,18 @@ def logging_setup(level: int, handlers: Sequence[logging.Handler]) -> None:
 
 
 def is_valid_kanji_svg(file_name: str, /) -> bool:
-    return (
-        file_name.startswith("0")
-        and file_name.endswith(".svg")
-        and len(file_name) == 9  # 0abcd.svg
-    )
+    return file_name.startswith("0") and file_name.endswith(".svg")
 
 
 def process_svg(input: pathlib.Path, output: pathlib.Path) -> None:
     try:
         _ = subprocess.run(
             [
-                "kanjivg-to-png",
+                (
+                    pathlib.Path.cwd()
+                    .joinpath("target", "release", "kanjivg-to-png")
+                    .as_posix()
+                ),
                 "--input",
                 input.as_posix(),
                 "--output",
@@ -133,7 +133,7 @@ def show_progress(
 
     percent = done / total
     filled = int(columns * percent)
-    bar = ("#" * filled).ljust(columns, " ")
+    bar = ("#" * filled).ljust(columns, "-")
     done_str = str(done).rjust(len(str(total)), "0")
 
     sys.stdout.write(f"\r|{bar}| {done_str}/{total} ({percent:.0%})")

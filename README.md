@@ -50,7 +50,7 @@ Alternatively, you can clone the repository and run:
 ```bash
 git clone --depth=1 -- https://github.com/nicdgonzalez/kanjivg-to-png
 cd kanjivg-to-png
-bash ./scripts/get-kanjivg-data.sh
+bash ./scripts/get-kanjivg-data.sh ./data
 ```
 
 ## Usage
@@ -69,7 +69,14 @@ This program wasn't designed to be run directly. Instead, run the following
 helper script to automatically generate PNGs for all of the SVGs:
 
 ```bash
-python3 ./scripts/main.py --input ./kanji --output ./kanji_output 2> error.log
+mkdir --parents ./logs
+python3 ./scripts/main.py --input ./data/kanji --output ./data/kanji_output 2> ./logs/error.log
+```
+
+Or run the provided Makefile:
+
+```bash
+make
 ```
 
 On most systems, this should complete in under a minute. Once complete, all of
@@ -82,7 +89,7 @@ A minimal example to convert a single KanjiVG SVG into a PNG:
 
 ```bash
 # "0672c" corresponds to the Kanji 本 (I explain how I got that later).
-kanjivg-to-png --input ./kanji/0672c.svg --output ./0672c.png
+kanjivg-to-png --input ./data/kanji/0672c.svg --output ./0672c.png
 ```
 
 ### Detailed example
@@ -99,8 +106,8 @@ The following is the same as before, but in a slightly more useful way:
 
 ```bash
 kanji="$(python3 -c 'print(hex(ord("本")).replace("0x", "0"))')"
-input="$PWD/kanji/$kanji.svg"
-output="$PWD/output/$kanji.png"
+input="$PWD/data/kanji/$kanji.svg"
+output="$PWD/data/kanji_output/$kanji.png"
 
 mkdir --parents "$(dirname "$output")"
 kanjivg-to-png --input "$input" --output "$output"
@@ -117,10 +124,10 @@ Here are some tips if you want to modify how the SVGs are parsed or rendered:
   ```bash
   # Set these up once, then re-use the final command.
   kanji="$(python3 -c 'print(hex(ord("本")).replace("0x", "0"))')"
-  input="$PWD/kanji/$kanji.svg"
+  input="$PWD/data/kanji/$kanji.svg"
   output="$PWD/debug.png"
 
-  cargo run -- --input "$input" --output "$output" && xdg-open "$output"
+  cargo run --release -- --input "$input" --output "$output" && xdg-open "$output"
   ```
 
 ## License
