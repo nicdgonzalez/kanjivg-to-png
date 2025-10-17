@@ -141,7 +141,7 @@ displays a randomized "Kanji of the Day":
 In an effort to rewrite NicBot from Python to Rust, I first need to find a
 replacement for all of its dependencies. One of which, as you might have
 guessed, is related to this project and the Kanji of the Day command. It is a
-library that scrapes data from [Jisho], a popular Japanese online-dictionary.
+library that scrapes data from [Jisho], a popular Japanese dictionary.
 
 Instead of rewriting the web scraper itself in Rust, I felt it would be more
 reliable (and fun) to download the same data that Jisho uses, and build the
@@ -166,3 +166,4 @@ This project uses and modifies Kanji SVG files from [KanjiVG], which is ©
 [nicbot]: https://github.com/nicdgonzalez/nicbot
 [releases]: https://github.com/nicdgonzalez/kanjivg-to-png/releases
 [this reddit comment]: https://www.reddit.com/r/LearnJapanese/comments/awr5vw/comment/ehriio7/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
+[jisho]: https://jisho.org
