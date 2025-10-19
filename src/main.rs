@@ -93,7 +93,7 @@ fn try_main() -> Result<ExitCode, anyhow::Error> {
     let mut frames = Vec::new();
 
     // Since the first stroke doesn't have a previous, we handle it separately.
-    prepare_stroke(&mut root, &strokes[0], &viewbox)?;
+    update_latest_stroke(&mut root, &strokes[0], &viewbox)?;
     let frame = create_frame(&root).context("failed to create stroke frame")?;
     frames.push(frame);
 
@@ -103,7 +103,7 @@ fn try_main() -> Result<ExitCode, anyhow::Error> {
             .context("failed to get previous stroke")?;
         dim_stroke(previous);
 
-        prepare_stroke(&mut root, &strokes[i], &viewbox)?;
+        update_latest_stroke(&mut root, &strokes[i], &viewbox)?;
         let frame = create_frame(&root).context("failed to create frame")?;
         frames.push(frame);
     }
@@ -114,7 +114,11 @@ fn try_main() -> Result<ExitCode, anyhow::Error> {
     Ok(ExitCode::SUCCESS)
 }
 
-fn prepare_stroke(root: &mut Root, path: &[usize], viewbox: &ViewBox) -> Result<(), anyhow::Error> {
+fn update_latest_stroke(
+    root: &mut Root,
+    path: &[usize],
+    viewbox: &ViewBox,
+) -> Result<(), anyhow::Error> {
     let stroke = root::get_stroke(root, path)?;
     unhide_stroke(stroke);
 

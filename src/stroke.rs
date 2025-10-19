@@ -32,8 +32,8 @@ pub fn dim_stroke(stroke: &mut Element) {
     _ = stroke.attributes.insert("style".to_owned(), style);
 }
 
-#[rustfmt::skip]
 /// Create the circle that highlights where to start the stroke.
+#[rustfmt::skip]
 pub fn start_circle(
     stroke: &mut Element,
     viewbox: &ViewBox,
