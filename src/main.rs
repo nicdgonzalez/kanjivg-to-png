@@ -37,7 +37,7 @@ fn app_view() -> impl IntoView {
             <Header />
             <main class="bg-zinc-100 dark:bg-zinc-900 text-black dark:text-white font-inter flex flex-col items-center">
                 <Routes fallback=|| "Not found">
-                    <Route path=path!("/") view=Home />
+                    <Route path=path!("/kanjivg-to-png") view=Home />
                 </Routes>
             </main>
             <Footer />
