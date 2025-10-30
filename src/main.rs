@@ -1,6 +1,3 @@
-// The code is in a weird middle stage where it started out being optimized for my specific
-// use case, but is in the process of being refactored to make it easier for others to edit it...
-
 #![warn(
     clippy::correctness,
     clippy::suspicious,

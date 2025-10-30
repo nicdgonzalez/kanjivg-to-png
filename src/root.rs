@@ -43,6 +43,13 @@ where
 }
 
 /// Get the path to each stroke.
+///
+/// Due to Rust's borrow rules, we store indices to each stroke instead of the element's
+/// themselves. Issues may arise if you're trying to insert or delete nodes in the middle
+/// of the tree, but if you open an issue I can help you implement protection for this.
+///
+/// A quick "temporary" solution could be to re-run this function after making changes.
+/// Although, Rust should be plenty fast enough to afford these extra computations regardless.
 pub fn get_strokes(root: &Root) -> Vec<NodePath> {
     fn walk(nodes: &[XMLNode], node_path: &mut NodePath, strokes: &mut Vec<NodePath>) {
         for (i, node) in nodes.iter().enumerate() {

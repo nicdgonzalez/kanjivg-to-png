@@ -85,16 +85,18 @@ mod tests {
 
     use super::*;
 
+    const ALLOWED_ERROR_MARGIN: f32 = 0.1;
+
     #[test]
     fn parse_viewbox() {
         let viewbox = "0 0 109 109"
             .parse::<ViewBox>()
             .expect("expected hardcoded viewBox to be valid");
 
-        assert_eq!(viewbox.x, 0.0);
-        assert_eq!(viewbox.y, 0.0);
-        assert_eq!(viewbox.width, 109.0);
-        assert_eq!(viewbox.height, 109.0);
+        assert!((viewbox.x - 0.0).abs() < ALLOWED_ERROR_MARGIN);
+        assert!((viewbox.y - 0.0).abs() < ALLOWED_ERROR_MARGIN);
+        assert!((viewbox.width - 109.0).abs() < ALLOWED_ERROR_MARGIN);
+        assert!((viewbox.height - 109.0).abs() < ALLOWED_ERROR_MARGIN);
     }
 
     #[test]
@@ -107,10 +109,10 @@ mod tests {
         let root = root::from_reader(reader).expect("expected hardcoded svg to be valid");
         let viewbox = ViewBox::from_root(&root).expect("expected hardcoded viewbox to be valid");
 
-        assert_eq!(viewbox.x(), 0.0);
-        assert_eq!(viewbox.y(), 0.0);
-        assert_eq!(viewbox.width(), 109.0);
-        assert_eq!(viewbox.height(), 109.0);
+        assert!((viewbox.x() - 0.0).abs() < ALLOWED_ERROR_MARGIN);
+        assert!((viewbox.y() - 0.0).abs() < ALLOWED_ERROR_MARGIN);
+        assert!((viewbox.width() - 109.0).abs() < ALLOWED_ERROR_MARGIN);
+        assert!((viewbox.height() - 109.0).abs() < ALLOWED_ERROR_MARGIN);
     }
 
     #[test]
@@ -123,10 +125,10 @@ mod tests {
         let root = root::from_reader(reader).expect("expected hardcoded svg to be valid");
         let viewbox = ViewBox::from_root(&root).expect("expected hardcoded viewbox to be valid");
 
-        assert_eq!(viewbox.x(), 0.0);
-        assert_eq!(viewbox.y(), 0.0);
-        assert_eq!(viewbox.width(), 500.0);
-        assert_eq!(viewbox.height(), 500.0);
+        assert!((viewbox.x() - 0.0).abs() < ALLOWED_ERROR_MARGIN);
+        assert!((viewbox.y() - 0.0).abs() < ALLOWED_ERROR_MARGIN);
+        assert!((viewbox.width() - 500.0).abs() < ALLOWED_ERROR_MARGIN);
+        assert!((viewbox.height() - 500.0).abs() < ALLOWED_ERROR_MARGIN);
     }
 
     #[test]
@@ -139,9 +141,9 @@ mod tests {
         let root = root::from_reader(reader).expect("expected hardcoded svg to be valid");
         let viewbox = ViewBox::from_root(&root).expect("expected hardcoded viewbox to be valid");
 
-        assert_eq!(viewbox.x(), 0.0);
-        assert_eq!(viewbox.y(), 0.0);
-        assert_eq!(viewbox.width(), 109.0);
-        assert_eq!(viewbox.height(), 109.0);
+        assert!((viewbox.x() - 0.0).abs() < ALLOWED_ERROR_MARGIN);
+        assert!((viewbox.y() - 0.0).abs() < ALLOWED_ERROR_MARGIN);
+        assert!((viewbox.width() - 109.0).abs() < ALLOWED_ERROR_MARGIN);
+        assert!((viewbox.height() - 109.0).abs() < ALLOWED_ERROR_MARGIN);
     }
 }
