@@ -21,7 +21,7 @@ pub fn Header() -> impl IntoView {
 
     view! {
         <header class="flex flex-row z-50 fixed top-0 w-screen min-h-8 justify-between items-center px-8 py-4 animate-fade-down">
-            <a href="/">"Kanji Diagram"</a>
+            <a href="/kanjivg-to-png">"Kanji Diagram"</a>
             <Navigation links=links />
         </header>
     }
