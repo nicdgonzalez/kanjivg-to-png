@@ -65,7 +65,7 @@ pub fn Home() -> impl IntoView {
                                 <div class="h-24 overflow-x-auto whitespace-nowrap">
                                     <img
                                         class="h-full w-auto object-contain block max-w-none"
-                                        src=format!("/kanji/{:05x}.png", u32::from(c))
+                                        src=format!("./kanji/{:05x}.png", u32::from(c))
                                     />
                                 </div>
                             </li>
